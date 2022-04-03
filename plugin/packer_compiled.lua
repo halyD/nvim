@@ -109,11 +109,6 @@ _G.packer_plugins = {
     path = "/home/fmst/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
-  ["nightfox.nvim"] = {
-    loaded = true,
-    path = "/home/fmst/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
-    url = "https://github.com/EdenEast/nightfox.nvim"
-  },
   ["nord.nvim"] = {
     loaded = true,
     path = "/home/fmst/.local/share/nvim/site/pack/packer/start/nord.nvim",

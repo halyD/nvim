@@ -63,7 +63,6 @@ return packer.startup(function(use)
 	use {'nvim-treesitter/nvim-treesitter',
 		run = 'TSUpdate'
 	}
-	use 'EdenEast/nightfox.nvim'
 	use 'shaunsingh/nord.nvim'
 	use 'folke/tokyonight.nvim'
 	use 'nvim-telescope/telescope.nvim'
