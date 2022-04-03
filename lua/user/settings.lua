@@ -21,5 +21,6 @@ vim.o.hlsearch = false
 --vim.g.nord_disable_background = false
 vim.g.tokyonight_style = "storm"
 vim.g.tokyonight_italic_functions = true
+vim.g.tokyonight_italic_variables = true
 vim.cmd[[colorscheme tokyonight]]
 
