@@ -2,7 +2,6 @@
 -- nnoremap
 opt = {noremap = true, silent = true}
 vim.api.nvim_set_keymap('n', '<C-f>', ':NvimTreeToggle<CR>', opt)
-vim.api.nvim_set_keymap('n', 'nT', ':tabnew<CR>', opt)
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
