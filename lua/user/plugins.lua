@@ -63,6 +63,7 @@ return packer.startup(function(use)
 	use {'nvim-treesitter/nvim-treesitter',
 		run = 'TSUpdate'
 	}
+	use 'karb94/neoscroll.nvim'
 	use 'shaunsingh/nord.nvim'
 	use 'folke/tokyonight.nvim'
 	use 'nvim-telescope/telescope.nvim'
@@ -71,6 +72,7 @@ return packer.startup(function(use)
 	use 'BurntSushi/ripgrep'
 	use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 	use 'folke/todo-comments.nvim'
+	use { "michaelb/sniprun", run = "bash ./install.sh" }
 	use 'folke/which-key.nvim'
 
 	if PACKER_BOOTSTRAP then
