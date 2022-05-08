@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/home/fmst/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
+  ["neoscroll.nvim"] = {
+    loaded = true,
+    path = "/home/fmst/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
+    url = "https://github.com/karb94/neoscroll.nvim"
+  },
   ["nord.nvim"] = {
     loaded = true,
     path = "/home/fmst/.local/share/nvim/site/pack/packer/start/nord.nvim",
@@ -154,6 +159,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/fmst/.local/share/nvim/site/pack/packer/start/ripgrep",
     url = "https://github.com/BurntSushi/ripgrep"
+  },
+  sniprun = {
+    loaded = true,
+    path = "/home/fmst/.local/share/nvim/site/pack/packer/start/sniprun",
+    url = "https://github.com/michaelb/sniprun"
   },
   ["telescope.nvim"] = {
     loaded = true,
