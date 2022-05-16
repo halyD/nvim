@@ -8,7 +8,7 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<space>;', ":TodoLocList<CR>", { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ft', ":TodoTelescope<CR>", { silent = true })
-vim.api.nvim_set_keymap('n', '<space>f', 'gg=G', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<space>f', 'FormatCode<CR>', { noremap = true, silent = true })
 
 
 

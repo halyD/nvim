@@ -8,3 +8,4 @@ vim.api.nvim_set_keymap('n', '<C-k>', ':lua vim.lsp.buf.signature_help()<CR>', {
 vim.api.nvim_set_keymap('n', '<C-n>', ':lua vim.lsp.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-p>', ':lua vim.lsp.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 -- autocmd BufWritePre *.cpp <cmd>lua vim.lsp.buf.formatting_sync(nil, 100)
+vim.cmd('autocmd BufWritePost * lua vim.lsp.buf.formatting()')
