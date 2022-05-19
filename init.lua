@@ -12,5 +12,6 @@ require "user.toggle-term"
 require "user.treesitter"
 require "user.whichkeycfg"
 require "user.neoscrollcfg"
-require "user.sniprun"
+-- require "user.sniprun"
 require "user.lualine"
+require 'user.notify'

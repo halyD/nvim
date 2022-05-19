@@ -72,12 +72,13 @@ return packer.startup(function(use)
 	use 'BurntSushi/ripgrep'
 	use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 	use 'folke/todo-comments.nvim'
-	use { "michaelb/sniprun", run = "bash ./install.sh" }
 	use 'folke/which-key.nvim'
 	use {
   		'nvim-lualine/lualine.nvim',
   		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
+	use 'rcarriga/nvim-notify'
+
 	if PACKER_BOOTSTRAP then
     		require("packer").sync()
   	end
