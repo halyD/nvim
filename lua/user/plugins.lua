@@ -79,6 +79,11 @@ return packer.startup(function(use)
 	}
 	use 'rcarriga/nvim-notify'
 
+	use {
+		"luukvbaal/stabilize.nvim",
+		config = function() require("stabilize").setup() end
+	}
+
 	if PACKER_BOOTSTRAP then
     		require("packer").sync()
   	end
