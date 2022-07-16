@@ -42,16 +42,10 @@ packer.init {
 return packer.startup(function(use)
 
 	use "wbthomason/packer.nvim"
-	use {
-		'kyazdani42/nvim-tree.lua',
-		requires = {
-			'kyazdani42/nvim-web-devicons', -- optional, for file icon
-		},
-		config = function() require 'nvim-tree'.setup {} end
-	}
-	use 'jiangmiao/auto-pairs'
+	use 'kyazdani42/nvim-tree.lua'
+	use "tpope/vim-surround"
 	use 'terryma/vim-multiple-cursors'
-	use 'tpope/vim-surround'
+	use 'windwp/nvim-autopairs'
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/nvim-cmp'
 	use 'L3MON4D3/LuaSnip'
@@ -69,13 +63,11 @@ return packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'
 	use 'akinsho/toggleterm.nvim'
 	use 'BurntSushi/ripgrep'
-	use { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+	use 'akinsho/bufferline.nvim'
+	use 'kyazdani42/nvim-web-devicons'
 	use 'folke/todo-comments.nvim'
 	use 'folke/which-key.nvim'
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-	}
+	use 'nvim-lualine/lualine.nvim'
 	-- use 'rcarriga/nvim-notify'
 	use {
 		"luukvbaal/stabilize.nvim",
