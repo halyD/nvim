@@ -4,11 +4,11 @@ if not status_ok then
 end
 
 configs.setup({
-	ensure_installed = {"cpp", "python", "lua", "rust"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	ensure_installed = { "cpp", "python", "lua", "rust", "c" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 	ignore_install = { "" }, -- List of parsers to ignore installing
 	highlight = {
-    -- use_languagetree = true,
+		-- use_languagetree = true,
 		enable = true, -- false will disable the whole extension
 		-- disable = { "css", "html" }, -- list of language that will be disabled
 		disable = { "css" }, -- list of language that will be disabled
@@ -29,9 +29,12 @@ configs.setup({
 	rainbow = {
 		enable = true,
 		colors = {
-			"Gold",
-			"Orchid",
-			"DodgerBlue",
+			"#68a0b0",
+			"#946EaD",
+			"#c7aA6D",
+			-- "Gold",
+			-- "Orchid",
+			-- "DodgerBlue",
 			-- "Cornsilk",
 			-- "Salmon",
 			-- "LawnGreen",
