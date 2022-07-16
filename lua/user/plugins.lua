@@ -64,7 +64,6 @@ return packer.startup(function(use)
 		run = 'TSUpdate'
 	}
 	use 'karb94/neoscroll.nvim'
-	use 'shaunsingh/nord.nvim'
 	use 'folke/tokyonight.nvim'
 	use 'nvim-telescope/telescope.nvim'
 	use 'nvim-lua/plenary.nvim'
@@ -77,13 +76,16 @@ return packer.startup(function(use)
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
-	use 'rcarriga/nvim-notify'
+	-- use 'rcarriga/nvim-notify'
 	use {
 		"luukvbaal/stabilize.nvim",
 		config = function() require("stabilize").setup() end
 	}
 	use "ahmedkhalf/project.nvim"
 	use 'ggandor/lightspeed.nvim'
+	-- use 'saecki/crates.nvim'
+	use "lalitmee/browse.nvim"
+
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

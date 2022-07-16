@@ -49,6 +49,7 @@ cmp.setup {
 		{ name = 'path' },
 		{ name = 'luasnip' },
 		{ name = 'buffer', keyword_length = 5 },
+		-- { name = 'crates' },
 	},
 
 	formatting = {

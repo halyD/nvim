@@ -12,6 +12,8 @@ require "user.treesitter"
 require "user.whichkeycfg"
 require "user.neoscrollcfg"
 require "user.lualine"
-require 'user.notify'
+-- require 'user.notify'
 require "user.project"
 require "user.lightspeed"
+-- require "user.crates"
+require "user.browse"

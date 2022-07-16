@@ -9,8 +9,6 @@ vim.api.nvim_set_keymap('n', '<space>;', ":TodoLocList<CR>", { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ft', ":TodoTelescope<CR>", { silent = true })
 -- vim.api.nvim_set_keymap('n', '<space>f', 'FormatCode<CR>', { noremap = true, silent = true })
 
-
-
 --inoremap
 vim.api.nvim_set_keymap('i', 'jj', '<ESC>', opt)
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', opt)
