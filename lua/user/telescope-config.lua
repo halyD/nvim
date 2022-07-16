@@ -31,4 +31,6 @@ telescope.setup {
 				["<CR>"] = actions.select_default,
 			}
 		}
-	} }
+	}
+
+}
