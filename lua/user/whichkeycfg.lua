@@ -79,8 +79,8 @@ local opts = {
 }
 
 local mappings = {
-	h = { ":BufferLineCyclePrev<CR>", "BufferPrev" },
-	l = { ":BufferLineCycleNext<CR>", "BufferNext" },
+	--	h = { ":BufferLineCyclePrev<CR>", "BufferPrev" },
+	--	l = { ":BufferLineCycleNext<CR>", "BufferNext" },
 	q = { ":q<CR>", "Quit" },
 	w = { ":w<CR>", "Save" },
 	Q = { ":wq<CR>", "Save & Quit" },

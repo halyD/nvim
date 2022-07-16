@@ -63,7 +63,7 @@ return packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'
 	use 'akinsho/toggleterm.nvim'
 	use 'BurntSushi/ripgrep'
-	use 'akinsho/bufferline.nvim'
+	-- use 'akinsho/bufferline.nvim'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'folke/todo-comments.nvim'
 	use 'folke/which-key.nvim'
@@ -77,7 +77,7 @@ return packer.startup(function(use)
 	use 'ggandor/lightspeed.nvim'
 	-- use 'saecki/crates.nvim'
 	use "lalitmee/browse.nvim"
-
+	use "matbme/JABS.nvim"
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
