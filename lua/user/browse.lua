@@ -13,6 +13,7 @@ local bookmark = {
 	"https://doc.rust-lang.org/book/",
 	"https://hackmd.io",
 	"https://github.com/christianchiarulli",
+	"https://doc.rust-lang.org/cargo",
 }
 
 
