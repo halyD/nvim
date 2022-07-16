@@ -43,7 +43,7 @@ local setup = {
 		scroll_up = '<c-u>', -- binding to scroll up inside the popup
 	},
 	window = {
-		border = "none", -- none, single, double, shadow
+		border = "single", -- none, single, double, shadow
 		position = "bottom", -- bottom, top
 		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
 		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
@@ -101,6 +101,13 @@ local mappings = {
 		m = { "<cmd>BrowseMdnSearch<cr>", "Mdn" },
 		b = { "<cmd>BrowseBookmarks<cr>", "bookmarks" },
 	},
+	T = {
+		name = "Treesitter",
+		h = { ":TSToggle highlight<cr>", "Highlight" },
+		r = { ":TSToggle rainbow<cr>", "Rainbow" },
+		p = { ":TSToggle playground<cr>", "Playground" },
+
+	}
 }
 
 which_key.setup(setup)
