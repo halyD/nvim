@@ -76,8 +76,10 @@ return packer.startup(function(use)
 	use 'ahmedkhalf/project.nvim'
 	use 'ggandor/lightspeed.nvim'
 	-- use 'saecki/crates.nvim'
-	use "lalitmee/browse.nvim"
+	use 'lalitmee/browse.nvim'
 	use 'matbme/JABS.nvim'
+	-- use 'fgheng/winbar.nvim'
+	-- use 'SmiteshP/nvim-navic'
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
