@@ -13,7 +13,7 @@ require 'jabs'.setup {
 	},
 
 	-- Options for preview window
-	preview_position = 'left', -- top, bottom, left, right. Default top
+	preview_position = 'top', -- top, bottom, left, right. Default top
 	preview = {
 		-- 	width = 30, -- default 70
 		-- 	height = 15, -- default 30
@@ -43,7 +43,7 @@ require 'jabs'.setup {
 
 	-- Keymaps
 	keymap = {
-		close = "<c-d>", -- Close buffer. Default D
+		close = "d", -- Close buffer. Default D
 		jump = "<space>", -- Jump to buffer. Default <cr>
 		h_split = "h", -- Horizontally split buffer. Default s
 		v_split = "v", -- Vertically split buffer. Default v

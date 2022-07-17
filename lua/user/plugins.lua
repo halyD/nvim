@@ -41,7 +41,7 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
 
-	use "wbthomason/packer.nvim"
+	use 'wbthomason/packer.nvim'
 	use 'kyazdani42/nvim-tree.lua'
 	use "tpope/vim-surround"
 	use 'terryma/vim-multiple-cursors'
@@ -68,16 +68,16 @@ return packer.startup(function(use)
 	use 'folke/todo-comments.nvim'
 	use 'folke/which-key.nvim'
 	use 'nvim-lualine/lualine.nvim'
-	-- use 'rcarriga/nvim-notify'
+	use 'rcarriga/nvim-notify'
 	use {
-		"luukvbaal/stabilize.nvim",
+		'luukvbaal/stabilize.nvim',
 		config = function() require("stabilize").setup() end
 	}
-	use "ahmedkhalf/project.nvim"
+	use 'ahmedkhalf/project.nvim'
 	use 'ggandor/lightspeed.nvim'
 	-- use 'saecki/crates.nvim'
 	use "lalitmee/browse.nvim"
-	use "matbme/JABS.nvim"
+	use 'matbme/JABS.nvim'
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

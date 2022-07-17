@@ -12,7 +12,7 @@ vim.cmd [[autocmd! BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 100)]]
 
 
 
-local servers = { 'pyright', 'rust_analyzer', 'bashls', 'sumneko_lua', 'clangd' }
+local servers = { 'rust_analyzer', 'bashls', 'sumneko_lua', 'clangd' }
 
 for _, lsp in pairs(servers) do
 	require('lspconfig')[lsp].setup {}
