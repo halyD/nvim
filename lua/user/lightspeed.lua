@@ -18,6 +18,6 @@ require 'lightspeed'.setup {
 		prev_match_group = '<tab>',
 	},
 	--- f/t ---
-	limit_ft_matches = 4,
+	limit_ft_matches = 5,
 	repeat_ft_with_target_char = false,
 }

@@ -80,6 +80,7 @@ return packer.startup(function(use)
 	use 'matbme/JABS.nvim'
 	-- use 'fgheng/winbar.nvim'
 	-- use 'SmiteshP/nvim-navic'
+	-- use 'simrat39/symbols-outline.nvim'
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
