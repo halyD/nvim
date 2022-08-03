@@ -95,7 +95,6 @@ local mappings = {
 	B = {
 		name = "Browse",
 		i = { "<cmd>BrowseInputSearch<cr>", "Input Search" },
-		B = { "<cmd>Browse<cr>", "Browse" },
 		d = { "<cmd>BrowseDevdocsSearch<cr>", "Devdocs" },
 		f = { "<cmd>BrowseDevdocsFiletypeSearch<cr>", "Devdocs Filetype(LUA)" },
 		m = { "<cmd>BrowseMdnSearch<cr>", "Mdn" },
@@ -106,7 +105,27 @@ local mappings = {
 		h = { ":TSToggle highlight<cr>", "Highlight" },
 		r = { ":TSToggle rainbow<cr>", "Rainbow" },
 		p = { ":TSToggle playground<cr>", "Playground" },
-
+		u = { ":TSUpdate<cr>", "Update" },
+	},
+	r = {
+		name = "Rust Tools",
+		i = { ":RustToggleInlayHints<cr>", "Toggle Inlay hints" },
+		c = { ":RustOpenCargo<cr>", "Open rust toml" },
+		-- samw with lsp key mapping support
+		-- h = { ":RustHoverActions<cr>", "Rust Hover Actions" },
+		p = { ":RustParentModule<cr>", "Parent Module" },
+	},
+	o = {
+		name = "Outline",
+		O = { ":SymbolsOutline<cr>", "Toggle Symbols Outline" },
+	},
+	L = {
+		name = 'LSPs',
+		r = { ":LspRestart<cr>", "Restart" },
+		i = { ":LspInfo<cr>", "INFOS" },
+		l = { ":LspLog<cr>", "LOGS" },
+		b = { ":LspStart<cr>", "Starting" },
+		e = { ":LspStop<cr>", "Stop" },
 	}
 }
 

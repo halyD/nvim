@@ -1,4 +1,9 @@
-require 'jabs'.setup {
+local status_ok, jabs = pcall(require, "jabs")
+if not status_ok then
+	return
+end
+
+jabs.setup {
 	-- Options for the main window
 	position = 'corner', -- center, corner. Default corner
 	width = 80, -- default 50

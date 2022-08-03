@@ -43,7 +43,7 @@ return packer.startup(function(use)
 
 	use 'wbthomason/packer.nvim'
 	use 'kyazdani42/nvim-tree.lua'
-	use "tpope/vim-surround"
+	use 'tpope/vim-surround'
 	use 'terryma/vim-multiple-cursors'
 	use 'windwp/nvim-autopairs'
 	use 'neovim/nvim-lspconfig'
@@ -54,9 +54,7 @@ return packer.startup(function(use)
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'onsails/lspkind-nvim'
-	use { 'nvim-treesitter/nvim-treesitter',
-		run = 'TSUpdate'
-	}
+	use 'nvim-treesitter/nvim-treesitter'
 	use 'karb94/neoscroll.nvim'
 	use 'folke/tokyonight.nvim'
 	use 'nvim-telescope/telescope.nvim'
@@ -79,8 +77,11 @@ return packer.startup(function(use)
 	use 'lalitmee/browse.nvim'
 	use 'matbme/JABS.nvim'
 	-- use 'fgheng/winbar.nvim'
-	-- use 'SmiteshP/nvim-navic'
-	-- use 'simrat39/symbols-outline.nvim'
+	use 'SmiteshP/nvim-navic'
+	use 'simrat39/symbols-outline.nvim'
+	-- use 'b0o/incline.nvim'
+	use 'numToStr/Comment.nvim'
+	use 'simrat39/rust-tools.nvim'
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
