@@ -115,10 +115,10 @@ local mappings = {
 		-- h = { ":RustHoverActions<cr>", "Rust Hover Actions" },
 		p = { ":RustParentModule<cr>", "Parent Module" },
 	},
-	o = {
-		name = "Outline",
-		O = { ":SymbolsOutline<cr>", "Toggle Symbols Outline" },
-	},
+	-- o = {
+	-- 	name = "Outline",
+	-- 	O = { ":SymbolsOutline<cr>", "Toggle Symbols Outline" },
+	-- },
 	L = {
 		name = 'LSPs',
 		r = { ":LspRestart<cr>", "Restart" },
@@ -126,7 +126,17 @@ local mappings = {
 		l = { ":LspLog<cr>", "LOGS" },
 		b = { ":LspStart<cr>", "Starting" },
 		e = { ":LspStop<cr>", "Stop" },
-	}
+	},
+	f = {
+		name = "Find",
+		f = { ":Telescope find_files<cr>", "Files" },
+		g = { ":Telescope live_grep<cr>", "Greps" },
+		b = { ":Telescope buffers<cr>", "Buffers" },
+		h = { ":Telescope help_tags<cr>", "Tags" },
+		n = { ":Telescope notify<cr>", "Notifications" },
+		t = { ":TodoTelescope<cr>", "TODOs" },
+		p = { ":Telescope projects<CR>", "Projects" },
+	},
 }
 
 which_key.setup(setup)

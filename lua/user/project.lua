@@ -46,4 +46,3 @@ if not tele_status_ok then
 end
 
 telescope.load_extension('projects')
-vim.api.nvim_set_keymap('n', '<leader>fp', ":Telescope projects<CR>", { silent = true })

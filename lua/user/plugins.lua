@@ -78,7 +78,7 @@ return packer.startup(function(use)
 	use 'matbme/JABS.nvim'
 	-- use 'fgheng/winbar.nvim'
 	use 'SmiteshP/nvim-navic'
-	use 'simrat39/symbols-outline.nvim'
+	-- use 'simrat39/symbols-outline.nvim'
 	-- use 'b0o/incline.nvim'
 	use 'numToStr/Comment.nvim'
 	use 'simrat39/rust-tools.nvim'

@@ -39,4 +39,3 @@ notify.setup {
 
 vim.notify = notify
 require("telescope").load_extension("notify")
-vim.api.nvim_set_keymap('n', '<Leader>fn', '<cmd>Telescope notify<CR>', { noremap = true, silent = true })
