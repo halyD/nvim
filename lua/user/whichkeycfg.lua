@@ -137,6 +137,12 @@ local mappings = {
 		t = { ":TodoTelescope<cr>", "TODOs" },
 		p = { ":Telescope projects<CR>", "Projects" },
 	},
+	t = {
+		name = "Terminals",
+		f = { ":ToggleTerm direction=float<cr>", "Float" },
+		h = { ":ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+		v = { ":ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+	}
 }
 
 which_key.setup(setup)
