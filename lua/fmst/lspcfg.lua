@@ -1,6 +1,10 @@
 local lsp = require('lsp-zero')
 
-lsp.preset('recommended')
+lsp.preset({
+	name = 'recommended',
+	set_lsp_keymaps = true,
+	suggest_lsp_servers = false,
+})
 
 lsp.ensure_installed({
 	'clangd',
@@ -10,25 +14,42 @@ lsp.ensure_installed({
 })
 
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
 	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-y>'] = cmp.mapping.confirm({select = true}),
 	['<C-Space>'] = cmp.mapping.complete(),
+	['<C-y>'] = cmp.mapping.confirm(cmp_select),
+	['<C-e>'] = cmp.mapping.abort(),
+})
+
+lsp.default_keymaps({
+	preserve_mappings = false
 })
 
 lsp.on_attach(function(client, bufnr)
-	local opt = {buffer = bufnr, remap = false}
-
-	vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opt)
-	vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opt)
-	vim.keymap.set('n', 'gr', function() vim.lsp.buf.reference() end, opt)
+	local opt = { buffer = bufnr, remap = false }
+	lsp.buffer_autoformat()
 end)
 
 lsp.setup_nvim_cmp({
-	mapping = cmp_mappings
+	mapping = cmp_mappings,
+	sources = {
+		{ name = 'nvim_lsp', keyword_length = 5 },
+		{ name = 'nvim_lua' },
+		{ name = 'path' },
+		{ name = 'luasnip' },
+		{ name = 'buffer',   keyword_length = 5 },
+	}
 })
 
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = false,
+	float = true,
+})
 
 lsp.setup()

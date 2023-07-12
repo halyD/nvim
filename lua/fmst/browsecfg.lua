@@ -14,6 +14,7 @@ local bookmark = {
 	"https://hackmd.io",
 	"https://github.com/christianchiarulli",
 	"https://doc.rust-lang.org/cargo",
+	"https://portal.nycu.edu.tw/#/"
 }
 
 

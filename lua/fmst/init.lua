@@ -12,5 +12,12 @@ require("fmst.autopaircfg")
 require("fmst.lualinecfg")
 require("fmst.harpooncfg")
 require("fmst.lspcfg")
-
+-- require("fmst.navbudcfg")
+-- require("fmst.petscfg")
+require("fmst.nvimtreecfg")
 print("hello from fmst")
+
+-- themes
+-- require("fmst.catppuccino")
+-- require("fmst.kanagawacfg")
+-- require("fmst.tokyonightcfg")
