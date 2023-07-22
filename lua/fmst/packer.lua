@@ -23,7 +23,13 @@ return require('packer').startup(function(use)
 	use 'kyazdani42/nvim-web-devicons'
 	use 'mbbill/undotree'
 	use 'rcarriga/nvim-notify'
-	use 'ggandor/lightspeed.nvim'
+
+	-- cursor motions
+	-- use 'ggandor/lightspeed.nvim'
+	use 'ggandor/leap.nvim'
+	require('leap').add_default_mappings()
+
+
 	use 'lalitmee/browse.nvim'
 	use 'windwp/nvim-autopairs'
 	use 'numToStr/Comment.nvim'
@@ -58,5 +64,6 @@ return require('packer').startup(function(use)
 		}
 
 	}
-	use 'nvim-tree/nvim-tree.lua'
+	-- use 'nvim-tree/nvim-tree.lua'
+	use 'folke/zen-mode.nvim'
 end)

@@ -14,7 +14,9 @@ require("fmst.harpooncfg")
 require("fmst.lspcfg")
 -- require("fmst.navbudcfg")
 -- require("fmst.petscfg")
-require("fmst.nvimtreecfg")
+-- require("fmst.nvimtreecfg")
+require("fmst.zencfg")
+
 print("hello from fmst")
 
 -- themes
