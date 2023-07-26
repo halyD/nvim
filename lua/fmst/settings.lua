@@ -3,6 +3,7 @@ vim.cmd 'lua vim.wo.wrap = false'
 vim.o.fileencoding   = "utf-8"
 vim.o.tabstop        = 4
 vim.o.shiftwidth     = 4
+vim.opt.softtabstop  = 4
 vim.o.mouse          = "a"
 vim.o.number         = true
 vim.o.cursorline     = true
@@ -15,7 +16,9 @@ vim.o.background     = "dark"
 vim.o.termguicolors  = true
 vim.o.hlsearch       = false
 vim.o.relativenumber = true
-
+vim.opt.guicursor    = ""
+vim.opt.incsearch    = true
+vim.opt.scrolloff    = 15
 
 require('ayu').setup({
 	mirage = true,
