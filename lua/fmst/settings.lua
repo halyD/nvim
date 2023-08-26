@@ -16,7 +16,14 @@ vim.o.background     = "dark"
 vim.o.termguicolors  = true
 vim.o.hlsearch       = false
 vim.o.relativenumber = true
-vim.opt.guicursor    = ""
+vim.opt.guicursor    = {
+	"n-v:block",
+	"i-c-ci-ve:ver25",
+	"r-cr:hor20",
+	"o:hor50",
+	"i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
+	"sm:block-blinkwait175-blinkoff150-blinkon175",
+}
 vim.opt.incsearch    = true
 vim.opt.scrolloff    = 15
 
