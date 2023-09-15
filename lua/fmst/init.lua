@@ -37,9 +37,9 @@ require('lazy').setup({
 		branch = 'v2.x',
 		dependencies = {
 			-- LSP Support
-			{ 'neovim/nvim-lspconfig' }, -- Required
-			-- { 'williamboman/mason.nvim' },  -- Optional
-			-- { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+			{ 'neovim/nvim-lspconfig' },    -- Required
+			{ 'williamboman/mason.nvim' },  -- Optional
+			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
 			-- Autocompletion
 			{ 'hrsh7th/nvim-cmp' }, -- Required
@@ -91,18 +91,18 @@ vim.cmd("colorscheme rose-pine")
 -- require('palenightfall').setup({ transparent = true, })
 
 if vim.fn.has('wsl') == 1 then
-    vim.g.clipboard = {
-        name = 'WslClipboard',
-        copy = {
-            ['+'] = 'clip.exe',
-            ['*'] = 'clip.exe',
-        },
-        paste = {
-            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        },
-        cache_enabled = 0,
-    }
+	vim.g.clipboard = {
+		name = 'WslClipboard',
+		copy = {
+			['+'] = 'clip.exe',
+			['*'] = 'clip.exe',
+		},
+		paste = {
+			['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+		},
+		cache_enabled = 0,
+	}
 end
 
 -- mappings config
@@ -117,9 +117,10 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', opt)
 
 vim.keymap.set('n', '<leader>a', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-vim.api.nvim_set_keymap('n',  '<space>w', ':w<CR>', opt)
-vim.api.nvim_set_keymap('n',  '<space>q', ':wq<CR>', opt)
+vim.api.nvim_set_keymap('n', '<space>w', ':w<CR>', opt)
+vim.api.nvim_set_keymap('n', '<space>q', ':wq<CR>', opt)
 vim.api.nvim_set_keymap('n', ';', ':', opt)
+
 
 --inoremap
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', opt)
@@ -400,6 +401,7 @@ lsp.setup_nvim_cmp({
 	}
 })
 
+-- ghost text removed
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = true,
@@ -569,12 +571,10 @@ browse.setup {
 
 local bookmark = {
 	"https://github.com/halyD",
+	"https://portal.nycu.edu.tw/#/",
+	"https://drive.google.com/drive/u/0/my-drive",
 	"https://www.youtube.com",
-	"https://doc.rust-lang.org/book/",
 	"https://hackmd.io",
-	"https://github.com/christianchiarulli",
-	"https://doc.rust-lang.org/cargo",
-	"https://portal.nycu.edu.tw/#/"
 }
 
 
