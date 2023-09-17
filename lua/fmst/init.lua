@@ -113,7 +113,6 @@ vim.api.nvim_create_user_command('Configs',
 	end,
 	{ desc = 'Open config files' })
 
-
 -- mappings config
 -- nnoremap
 opt = { noremap = true, silent = true }
@@ -580,6 +579,7 @@ browse.setup {
 
 local bookmark = {
 	"https://github.com/halyD",
+	"https://github.com/halyD/nvim",
 	"https://portal.nycu.edu.tw/#/",
 	"https://drive.google.com/drive/u/0/my-drive",
 	"https://www.youtube.com",
