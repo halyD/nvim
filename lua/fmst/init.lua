@@ -79,6 +79,7 @@ vim.opt.guicursor    = {
 }
 vim.opt.incsearch    = true
 vim.opt.scrolloff    = 15
+vim.opt.splitright   = true
 
 -- require('ayu').setup({
 -- 	mirage = true,
@@ -104,6 +105,14 @@ if vim.fn.has('wsl') == 1 then
 		cache_enabled = 0,
 	}
 end
+
+vim.api.nvim_create_user_command('Configs',
+	function(opts)
+		vim.cmd 'vnew'
+		vim.cmd "e ~/.config/nvim/lua/fmst/init.lua"
+	end,
+	{ desc = 'Open config files' })
+
 
 -- mappings config
 -- nnoremap
@@ -261,8 +270,6 @@ local opts = {
 }
 
 local mappings = {
-	--	h = { ":BufferLineCyclePrev<CR>", "BufferPrev" },
-	--	l = { ":BufferLineCycleNext<CR>", "BufferNext" },
 	b = {
 		name = "Browse",
 		i = { "<cmd>BrowseInputSearch<cr>", "Input Search" },
@@ -306,7 +313,8 @@ local mappings = {
 	s = {
 		name = "Shell",
 		x = { "<cmd>!chmod +x %<CR>", "add exec" },
-	}
+	},
+
 }
 
 which_key.setup(setup)
@@ -368,16 +376,17 @@ lsp.ensure_installed({
 	'clangd',
 	'lua_ls',
 	'pyright',
-	'bashls'
+	'bashls',
+	'marksman',
+	'cmake',
 })
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-Space>'] = cmp.mapping.complete(),
-	['<C-y>'] = cmp.mapping.confirm(cmp_select),
+	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+	['<C-n>'] = cmp.mapping.select_next_item(smp_select),
+	['<C-Space>'] = cmp.mapping.confirm(cmp_select),
 	['<C-e>'] = cmp.mapping.abort(),
 })
 
