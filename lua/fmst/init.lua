@@ -14,14 +14,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 	"folke/which-key.nvim",
-	{ 'rose-pine/neovim',        name = 'rose-pine' },
+	{ 'rose-pine/neovim', name = 'rose-pine' },
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.2',
 		-- or                              , branch = '0.1.x',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-	{ 'akinsho/toggleterm.nvim', version = "*",     config = true },
+	-- { 'akinsho/toggleterm.nvim', version = "*",     config = true },
 	'mbbill/undotree',
 	'rcarriga/nvim-notify',
 	'ggandor/leap.nvim',
@@ -106,6 +106,7 @@ if vim.fn.has('wsl') == 1 then
 	}
 end
 
+-- custom commands
 vim.api.nvim_create_user_command('Configs',
 	function(opts)
 		vim.cmd 'vnew'
@@ -113,9 +114,23 @@ vim.api.nvim_create_user_command('Configs',
 	end,
 	{ desc = 'Open config files' })
 
+-- under development
+vim.api.nvim_create_user_command('Install', function()
+	local prompt = 'Enter packages: '
+	local default = ""
+	vim.ui.input({ prompt = prompt, defualt = default },
+		function(input)
+			if input == nil or input == "" then return end
+			print('input := ', vim.fn.trim(input))
+			local cmd = "sudo pacman -S " .. vim.fn.trim(input)
+			print('cmd := ', cmd)
+			os.execute(cmd)
+		end)
+end, { desc = 'Install packages for the system' })
+
 -- mappings config
 -- nnoremap
-opt = { noremap = true, silent = true }
+local opt = { noremap = true, silent = true }
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', opt)
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', opt)
@@ -320,47 +335,47 @@ which_key.setup(setup)
 which_key.register(mappings, opts)
 
 -- toggleterm config
-local status_ok, toggleterm = pcall(require, "toggleterm")
-if not status_ok then
-	return
-end
-
-toggleterm.setup({
-	-- size can be a number or function which is passed the current terminal
-	size = 22,
-	open_mapping = [[<c-\>]],
-	hide_numbers = true,   -- hide the number column in toggleterm buffers
-	shade_filetypes = {},
-	autochdir = false,     -- when neovim changes it current directory the terminal will change it's own when next it's opened
-	shade_terminals = false, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
-	start_in_insert = true,
-	insert_mappings = true, -- whether or not the open mapping applies in insert mode
-	terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-	persist_size = true,
-	persist_mode = true,   -- if set to true (default) the previous terminal mode will be remembered
-	direction = 'float',
-	close_on_exit = true,  -- close the terminal window when the process exits
-	shell = vim.o.shell,   -- change the default shell
-	auto_scroll = true,    -- automatically scroll to the bottom on terminal output
-	-- This field is only relevant if direction is set to 'float'
-	float_opts = {
-		-- The border key is *almost* the same as 'nvim_open_win'
-		-- see :h nvim_open_win for details on borders however
-		-- the 'curved' border is a custom border type
-		-- not natively supported but implemented in this plugin.
-		border = 'curved',
-		-- like `size`, width and height can be a number or function which is passed the current terminal
-		width = 200,
-		height = 50,
-		winblend = 3,
-	},
-	winbar = {
-		enabled = false,
-		name_formatter = function(term) --  term: Terminal
-			return term.name
-		end
-	},
-})
+-- local status_ok, toggleterm = pcall(require, "toggleterm")
+-- if not status_ok then
+-- 	return
+-- end
+--
+-- toggleterm.setup({
+-- 	-- size can be a number or function which is passed the current terminal
+-- 	size = 22,
+-- 	open_mapping = [[<c-\>]],
+-- 	hide_numbers = true,   -- hide the number column in toggleterm buffers
+-- 	shade_filetypes = {},
+-- 	autochdir = false,     -- when neovim changes it current directory the terminal will change it's own when next it's opened
+-- 	shade_terminals = false, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
+-- 	start_in_insert = true,
+-- 	insert_mappings = true, -- whether or not the open mapping applies in insert mode
+-- 	terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+-- 	persist_size = true,
+-- 	persist_mode = true,   -- if set to true (default) the previous terminal mode will be remembered
+-- 	direction = 'float',
+-- 	close_on_exit = true,  -- close the terminal window when the process exits
+-- 	shell = vim.o.shell,   -- change the default shell
+-- 	auto_scroll = true,    -- automatically scroll to the bottom on terminal output
+-- 	-- This field is only relevant if direction is set to 'float'
+-- 	float_opts = {
+-- 		-- The border key is *almost* the same as 'nvim_open_win'
+-- 		-- see :h nvim_open_win for details on borders however
+-- 		-- the 'curved' border is a custom border type
+-- 		-- not natively supported but implemented in this plugin.
+-- 		border = 'curved',
+-- 		-- like `size`, width and height can be a number or function which is passed the current terminal
+-- 		width = 200,
+-- 		height = 50,
+-- 		winblend = 3,
+-- 	},
+-- 	winbar = {
+-- 		enabled = false,
+-- 		name_formatter = function(term) --  term: Terminal
+-- 			return term.name
+-- 		end
+-- 	},
+-- })
 
 -- LSP config
 local lsp = require('lsp-zero')
