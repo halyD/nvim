@@ -34,18 +34,25 @@ require('lazy').setup({
 	'folke/zen-mode.nvim',
 	{
 		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
+		branch = 'v3.x',
+		lazy = true,
+		config = false,
+	},
+	{
+		'neovim/nvim-lspconfig',
 		dependencies = {
-			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },    -- Required
-			{ 'williamboman/mason.nvim' },  -- Optional
-			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-			-- Autocompletion
-			{ 'hrsh7th/nvim-cmp' }, -- Required
-			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
-			{ 'L3MON4D3/LuaSnip' }, -- Required
+			{ 'hrsh7th/cmp-nvim-lsp' },
 		}
+	},
+	{
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			{ 'L3MON4D3/LuaSnip' }
+		},
+	},
+	{
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim',
 	},
 	'nvim-treesitter/nvim-treesitter',
 })
@@ -386,7 +393,7 @@ lsp.preset({
 	suggest_lsp_servers = false,
 })
 
-lsp.ensure_installed({
+lsp.setup_servers({
 	'clangd',
 	'lua_ls',
 	'pyright',
@@ -413,7 +420,22 @@ lsp.on_attach(function(client, bufnr)
 	lsp.buffer_autoformat()
 end)
 
-lsp.setup_nvim_cmp({
+require('mason').setup({})
+require('mason-lspconfig').setup({
+	ensure_installed = {
+		'clangd',
+		'lua_ls',
+		'pyright',
+		'bashls',
+		'marksman',
+		'cmake',
+	}
+})
+
+
+-- was lsp setup
+-- lsp.setup_nvim_cmp({
+cmp.setup({
 	mapping = cmp_mappings,
 	sources = {
 		{ name = 'nvim_lsp', keyword_length = 5 },
@@ -501,7 +523,7 @@ npairs.setup {
 --[[ local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
-	return
+return
 end
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } }) ]]
 
@@ -630,6 +652,7 @@ end, {})
 command("BrowseMdnSearch", function()
 	browse.mdn.search()
 end, {})
+
 
 -- harpoon config
 local status_ok, harpoon = pcall(require, "harpoon")
@@ -779,4 +802,4 @@ notify.setup {
 }
 
 -- leap config
-require('leap').add_default_mappings()
+-- require('leap').add_default_mappings()
