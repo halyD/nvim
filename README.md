@@ -8,4 +8,7 @@
 ### changes
 ##### browse.nvim
 - open_cmd = { "cmd.exe", "/c", "start" } to trigger browser app in WSL (under is_wsl())
-- ~\.local\share\nvim\lazy\browse.nvim\lua\browse (WSL -> \)
+- ~/.local/share/nvim/lazy/browse.nvim/lua/browse 
+
+##### ShaDa error
+- rm ~/.local/state/nvim/shada/*
