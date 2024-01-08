@@ -98,6 +98,7 @@ vim.cmd("colorscheme rose-pine")
 -- vim.cmd("colorscheme palenightfall")
 -- require('palenightfall').setup({ transparent = true, })
 
+--[[
 if vim.fn.has('wsl') == 1 then
 	vim.g.clipboard = {
 		name = 'WslClipboard',
@@ -112,6 +113,8 @@ if vim.fn.has('wsl') == 1 then
 		cache_enabled = 0,
 	}
 end
+]]
+   --
 
 -- custom commands
 vim.api.nvim_create_user_command('Configs',
