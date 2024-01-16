@@ -14,10 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 	"folke/which-key.nvim",
-	{ 'rose-pine/neovim', name = 'rose-pine' },
+	{ 'rose-pine/neovim',                 name = 'rose-pine' },
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = '0.1.2',
+		tag = '0.1.5',
 		-- or                              , branch = '0.1.x',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
@@ -31,30 +31,37 @@ require('lazy').setup({
 	'numToStr/Comment.nvim',
 	'nvim-lualine/lualine.nvim',
 	'ThePrimeagen/harpoon',
-	'folke/zen-mode.nvim',
-	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v3.x',
-		lazy = true,
-		config = false,
-	},
-	{
-		'neovim/nvim-lspconfig',
-		dependencies = {
-			{ 'hrsh7th/cmp-nvim-lsp' },
-		}
-	},
-	{
-		'hrsh7th/nvim-cmp',
-		dependencies = {
-			{ 'L3MON4D3/LuaSnip' }
-		},
-	},
-	{
-		'williamboman/mason.nvim',
-		'williamboman/mason-lspconfig.nvim',
-	},
+	-- 'folke/zen-mode.nvim',
+	--- Uncomment the two plugins below if you want to manage the language servers from neovim
+	--- and read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
+	{ 'williamboman/mason.nvim' },
+	{ 'williamboman/mason-lspconfig.nvim' },
+	{ 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+	{ 'neovim/nvim-lspconfig' },
+	{ 'hrsh7th/cmp-nvim-lsp' },
+	{ 'hrsh7th/nvim-cmp' },
+	{ 'L3MON4D3/LuaSnip' },
 	'nvim-treesitter/nvim-treesitter',
+	{
+		"folke/tokyonight.nvim",
+	},
+
+	-- lazy.nvim
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		}
+	}
 })
 
 -- settings config
@@ -93,7 +100,7 @@ vim.opt.splitright   = true
 -- 	overrides = {},
 -- })
 
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme tokyonight-night")
 
 -- vim.cmd("colorscheme palenightfall")
 -- require('palenightfall').setup({ transparent = true, })
@@ -114,7 +121,7 @@ if vim.fn.has('wsl') == 1 then
 	}
 end
 ]]
-   --
+--
 
 -- custom commands
 vim.api.nvim_create_user_command('Configs',
@@ -183,6 +190,7 @@ vim.keymap.set('n', 'N', "Nzzzv")
 -- vim.keymap.set('x', '<leader>p', "\"_dP")
 
 -- zen config
+--[[
 vim.keymap.set('n', '<leader>zz', function()
 	require('zen-mode').setup {
 		window = {
@@ -211,6 +219,8 @@ vim.keymap.set('n', '<leader>zZ', function()
 	vim.wo.number = true
 	vim.wo.rnu = true
 end)
+]]
+--
 
 -- whichkey config
 local status_ok, which_key = pcall(require, "which-key")
@@ -396,24 +406,6 @@ lsp.preset({
 	suggest_lsp_servers = false,
 })
 
-lsp.setup_servers({
-	'clangd',
-	'lua_ls',
-	'pyright',
-	'bashls',
-	'marksman',
-	'cmake',
-})
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(smp_select),
-	['<C-Space>'] = cmp.mapping.confirm(cmp_select),
-	['<C-e>'] = cmp.mapping.abort(),
-})
-
 lsp.default_keymaps({
 	preserve_mappings = false
 })
@@ -423,7 +415,7 @@ lsp.on_attach(function(client, bufnr)
 	lsp.buffer_autoformat()
 end)
 
-require('mason').setup({})
+require('mason').setup()
 require('mason-lspconfig').setup({
 	ensure_installed = {
 		'clangd',
@@ -432,30 +424,37 @@ require('mason-lspconfig').setup({
 		'bashls',
 		'marksman',
 		'cmake',
+		'awk_ls'
 	}
 })
 
+-- cmps
+local cmp = require('cmp')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
--- was lsp setup
--- lsp.setup_nvim_cmp({
 cmp.setup({
-	mapping = cmp_mappings,
+	mapping = cmp.mapping.preset.insert({
+		['<C-p>'] = cmp.mapping.select_prev_item({ select = true }),
+		['<C-n>'] = cmp.mapping.select_next_item({ select = true }),
+		['<C-Space>'] = cmp.mapping.confirm(cmp_select),
+		['<C-e>'] = cmp.mapping.abort(),
+	}),
+	formatting = lsp.cmp_format(),
 	sources = {
-		{ name = 'nvim_lsp', keyword_length = 5 },
-		{ name = 'nvim_lua' },
 		{ name = 'path' },
+		{ name = 'nvim_lsp' },
+		{ name = 'nvim_lua' },
 		{ name = 'luasnip' },
-		{ name = 'buffer',   keyword_length = 5 },
+		{ name = 'buffer' },
 	}
 })
 
--- ghost text removed
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = true,
 	update_in_insert = true,
 	underline = true,
-	severity_sort = false,
+	severity_sort = true,
 	float = true,
 })
 
@@ -806,3 +805,23 @@ notify.setup {
 
 -- leap config
 require('leap').add_default_mappings()
+
+-- noice config
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
