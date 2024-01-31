@@ -5,6 +5,7 @@
 - **ripgrep** / fd
 - clipboard : **xclip**
 - LSP : **pyright**, **clangd**, **bashls**, and such
+- linter : ruff-lsp
 
 ### changes
 ##### browse.nvim

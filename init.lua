@@ -1,3 +1,3 @@
-require('fmst')
+print('passing through :', vim.fn.expand('%:p'))
 
-print('passing through .config/init.lua') 
+require('fmst')

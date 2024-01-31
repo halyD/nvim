@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-	"folke/which-key.nvim",
+	-- "folke/which-key.nvim",
 	{ 'rose-pine/neovim',                 name = 'rose-pine' },
 	{
 		'nvim-telescope/telescope.nvim',
@@ -31,7 +31,7 @@ require('lazy').setup({
 	'numToStr/Comment.nvim',
 	'nvim-lualine/lualine.nvim',
 	'ThePrimeagen/harpoon',
-	-- 'folke/zen-mode.nvim',
+	'folke/zen-mode.nvim',
 	--- Uncomment the two plugins below if you want to manage the language servers from neovim
 	--- and read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 	{ 'williamboman/mason.nvim' },
@@ -42,11 +42,6 @@ require('lazy').setup({
 	{ 'hrsh7th/nvim-cmp' },
 	{ 'L3MON4D3/LuaSnip' },
 	'nvim-treesitter/nvim-treesitter',
-	{
-		"folke/tokyonight.nvim",
-	},
-
-	-- lazy.nvim
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -100,7 +95,7 @@ vim.opt.splitright   = true
 -- 	overrides = {},
 -- })
 
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd("colorscheme rose-pine")
 
 -- vim.cmd("colorscheme palenightfall")
 -- require('palenightfall').setup({ transparent = true, })
@@ -158,7 +153,7 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', opt)
 vim.keymap.set('n', '<leader>a', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 vim.api.nvim_set_keymap('n', '<space>w', ':w<CR>', opt)
-vim.api.nvim_set_keymap('n', '<space>q', ':wq<CR>', opt)
+vim.api.nvim_set_keymap('n', '<space>q', ':q<CR>', opt)
 vim.api.nvim_set_keymap('n', ';', ':', opt)
 
 
@@ -190,7 +185,6 @@ vim.keymap.set('n', 'N', "Nzzzv")
 -- vim.keymap.set('x', '<leader>p', "\"_dP")
 
 -- zen config
---[[
 vim.keymap.set('n', '<leader>zz', function()
 	require('zen-mode').setup {
 		window = {
@@ -219,10 +213,9 @@ vim.keymap.set('n', '<leader>zZ', function()
 	vim.wo.number = true
 	vim.wo.rnu = true
 end)
-]]
---
 
 -- whichkey config
+--[[
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
 	return
@@ -305,12 +298,12 @@ local opts = {
 
 local mappings = {
 	b = {
-		name = "Browse",
-		i = { "<cmd>BrowseInputSearch<cr>", "Input Search" },
-		d = { "<cmd>BrowseDevdocsSearch<cr>", "Devdocs" },
-		f = { "<cmd>BrowseDevdocsFiletypeSearch<cr>", "Devdocs Filetype(LUA)" },
-		m = { "<cmd>BrowseMdnSearch<cr>", "Mdn" },
-		b = { "<cmd>BrowseBookmarks<cr>", "bookmarks" },
+		name = "browse",
+		i = { "<cmd>browseinputsearch<cr>", "input search" },
+		d = { "<cmd>browsedevdocssearch<cr>", "devdocs" },
+		f = { "<cmd>browsedevdocsfiletypesearch<cr>", "devdocs filetype(lua)" },
+		m = { "<cmd>browsemdnsearch<cr>", "mdn" },
+		b = { "<cmd>browsebookmarks<cr>", "bookmarks" },
 	},
 	T = {
 		name = "Treesitter",
@@ -335,24 +328,12 @@ local mappings = {
 		h = { ":Telescope help_tags<cr>", "Tags" },
 		n = { ":Telescope notify<cr>", "Notifications" },
 	},
-	t = {
-		name = "Terminals",
-		f = { ":ToggleTerm direction=float<cr>", "Float" },
-		h = { ":ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-		v = { ":ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-	},
-	h = {
-		name = "Harpoon",
-	},
-	s = {
-		name = "Shell",
-		x = { "<cmd>!chmod +x %<CR>", "add exec" },
-	},
-
 }
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
+]]
+--
 
 -- toggleterm config
 -- local status_ok, toggleterm = pcall(require, "toggleterm")
@@ -402,18 +383,76 @@ local lsp = require('lsp-zero')
 
 lsp.preset({
 	name = 'recommended',
-	set_lsp_keymaps = true,
-	suggest_lsp_servers = false,
 })
 
-lsp.default_keymaps({
-	preserve_mappings = false
+lsp.setup_servers({
+	'clangd',
+	'lua_ls',
+	'pyright',
+	'bashls',
+	'marksman',
+	'cmake',
+	'ruff_lsp',
+
 })
 
+local opts = { buffer = bufnr, remap = false }
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+-- autoformat
 lsp.on_attach(function(client, bufnr)
-	local opt = { buffer = bufnr, remap = false }
 	lsp.buffer_autoformat()
 end)
+
+-- linter and formatter for python
+local opts = { noremap = true, silent = true }
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+end
+
+-- Configure `ruff-lsp`.
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+-- For the default config, along with instructions on how to customize the settings
+
+local on_attach = function(client, bufnr)
+	-- Enable completion triggered by <c-x><c-o>
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+	-- Mappings.
+	-- See `:help vim.lsp.*` for documentation on any of the below functions
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, bufopts)
+	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, bufopts)
+	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, bufopts)
+	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, bufopts)
+	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, bufopts)
+	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, bufopts)
+	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, bufopts)
+	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, bufopts)
+	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, bufopts)
+	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, bufopts)
+end
+
+require('lspconfig').ruff_lsp.setup {
+	on_attach = on_attach,
+	init_options = {
+		settings = {
+			-- Any extra CLI arguments for `ruff` go here.
+			args = {},
+		}
+	}
+}
 
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -424,9 +463,11 @@ require('mason-lspconfig').setup({
 		'bashls',
 		'marksman',
 		'cmake',
-		'awk_ls'
+		'ruff_lsp',
 	}
 })
+
+lsp.setup()
 
 -- cmps
 local cmp = require('cmp')
@@ -449,16 +490,17 @@ cmp.setup({
 	}
 })
 
+
+
 vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	update_in_insert = true,
-	underline = true,
-	severity_sort = true,
+	-- virtual_text = true,
+	-- signs = true,
+	-- update_in_insert = true,
+	-- 	underline = true,
+	-- 	severity_sort = true,
 	float = true,
 })
 
-lsp.setup()
 
 -- telescope config
 local status_ok, telescope = pcall(require, "telescope")
@@ -492,6 +534,11 @@ telescope.setup {
 	}
 
 }
+vim.keymap.set('n', "<leader>ff", "<cmd>Telescope find_files<cr>")
+vim.keymap.set('n', "<leader>fg", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set('n', "<leader>fb", "<cmd>Telescope buffers<cr>")
+vim.keymap.set('n', "<leader>fh", "<cmd>Telescope help_tags<cr>")
+vim.keymap.set('n', "<leader>fn", "<cmd>Telescope notify<cr>")
 
 -- autopair config
 -- Setup nvim-cmp.
@@ -655,6 +702,11 @@ command("BrowseMdnSearch", function()
 	browse.mdn.search()
 end, {})
 
+vim.keymap.set('n', "<leader>bb", vim.cmd.BrowseBookmarks);
+vim.keymap.set('n', "<leader>bi", vim.cmd.BrowseInputSearch);
+vim.keymap.set('n', "<leader>bd", vim.cmd.BrowseDevdocsSearch);
+vim.keymap.set('n', "<leader>bf", vim.cmd.BrowseDevdocsFiletypeSearch);
+vim.keymap.set('n', "<leader>bm", vim.cmd.BrowseMdnSearch);
 
 -- harpoon config
 local status_ok, harpoon = pcall(require, "harpoon")
@@ -808,20 +860,20 @@ require('leap').add_default_mappings()
 
 -- noice config
 require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
+	lsp = {
+		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+		override = {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true,
+		},
+	},
+	-- you can enable a preset for easier configuration
+	presets = {
+		bottom_search = true,   -- use a classic bottom cmdline for search
+		command_palette = true, -- position the cmdline and popupmenu together
+		long_message_to_split = true, -- long messages will be sent to a split
+		inc_rename = false,     -- enables an input dialog for inc-rename.nvim
+		lsp_doc_border = false, -- add a border to hover docs and signature help
+	},
 })

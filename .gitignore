@@ -1,1 +1,5 @@
-lazy-lock.json
+*lazy-lock.json
+*.luarc.json
+*.json
+test/
+
