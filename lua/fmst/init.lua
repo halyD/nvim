@@ -48,7 +48,17 @@ require("lazy").setup({
   { "hrsh7th/cmp-vsnip" },
   { "hrsh7th/nvim-cmp" },
   { "L3MON4D3/LuaSnip" },
-  "nvim-treesitter/nvim-treesitter",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    lazy = true,
+  },
   --[[
 	{
 		"folke/noice.nvim",
@@ -105,33 +115,25 @@ require("fidget").setup({
   },
 })
 -- settings config
-vim.o.hidden = true
+vim.opt.hidden = true
 vim.cmd("lua vim.wo.wrap = false")
-vim.o.fileencoding = "utf-8"
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+vim.opt.fileencoding = "utf-8"
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-vim.o.mouse = "a"
-vim.o.number = true
-vim.o.cursorline = true
-vim.o.ruler = true
-vim.o.clipboard = "unnamedplus"
-vim.o.smarttab = true
-vim.o.smartindent = true
-vim.o.autoindent = true
-vim.o.background = "dark"
-vim.o.termguicolors = true
-vim.o.hlsearch = false
-vim.o.relativenumber = true
+vim.opt.mouse = "a"
+vim.opt.number = true
+vim.opt.cursorline = true
+vim.opt.ruler = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.smarttab = true
+vim.opt.smartindent = true
+vim.opt.autoindent = true
+vim.opt.background = "dark"
+vim.opt.termguicolors = true
+vim.opt.hlsearch = false
+vim.opt.relativenumber = true
 
-vim.opt.guicursor = {
-  "n-v:block",
-  "i-c-ci-ve:ver25",
-  "r-cr:hor20",
-  "o:hor50",
-  "i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
-  "sm:block-blinkwait175-blinkoff150-blinkon175",
-}
 vim.opt.incsearch = true
 vim.opt.scrolloff = 15
 vim.opt.splitright = true
@@ -144,6 +146,7 @@ vim.opt.ignorecase = true
 
 vim.cmd("colorscheme rose-pine")
 
+vim.api.nvim_set_hl(0, "Cursor", { fg = "#00ff00" })
 -- vim.cmd("colorscheme palenightfall")
 -- require('palenightfall').setup({ transparent = true, })
 
@@ -199,17 +202,18 @@ end, { desc = "Install packages for the system" })
 -- nnoremap
 local opt = { noremap = true, silent = true }
 vim.g.mapleader = " "
+-- update : move to harpoon settings
+--[[ vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opt)
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opt)
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opt)
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", opt)
-vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", opt)
+vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", opt) ]]
 -- vim.api.nvim_set_keymap('n', '<C-f>', ':Neotree toggle=true<cr>', opt)
 
-vim.keymap.set("n", "<leader>a", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>a", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.api.nvim_set_keymap("n", "<space>w", ":w<CR>", opt)
 vim.api.nvim_set_keymap("n", "<space>q", ":q<CR>", opt)
-vim.api.nvim_set_keymap("n", ";", ":", opt)
+-- vim.api.nvim_set_keymap("n", ";", ":", opt)
 
 --inoremap
 vim.api.nvim_set_keymap("i", "jk", "<ESC>", opt)
@@ -537,6 +541,7 @@ lsp.setup()
 require("mason").setup()
 require("mason-lspconfig").setup()
 
+-- original from KickStart.nvim configs
 local servers = {
   clangd = {},
   -- gopls = {},
@@ -822,19 +827,19 @@ end
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
-vim.keymap.set("n", "<leader>hn", ui.toggle_quick_menu)
-vim.keymap.set("n", "<leader>ha", mark.add_file)
+vim.keymap.set("n", "<leader>n", ui.toggle_quick_menu)
+vim.keymap.set("n", "<leader>a", mark.add_file)
 
-vim.keymap.set("n", "<leader>hh", function()
+vim.keymap.set("n", "<leader>h", function()
   ui.nav_file(1)
 end)
-vim.keymap.set("n", "<leader>hj", function()
+vim.keymap.set("n", "<leader>j", function()
   ui.nav_file(2)
 end)
-vim.keymap.set("n", "<leader>hk", function()
+vim.keymap.set("n", "<leader>k", function()
   ui.nav_file(3)
 end)
-vim.keymap.set("n", "<leader>hl", function()
+vim.keymap.set("n", "<leader>l", function()
   ui.nav_file(4)
 end)
 
@@ -1029,4 +1034,110 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
   end,
+})
+
+-- treesitters
+---@diagnostic disable-next-line: missing-fields
+require("nvim-treesitter.configs").setup({
+  highlight = {
+    enable = true,
+  },
+  auto_install = true,
+  sync_install = true,
+  ensure_installed = {
+    "c",
+    "cpp",
+    "python",
+    "zig",
+    "lua",
+    "vim",
+    "gitignore",
+    "bash",
+    "markdown",
+    "make",
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<C-space>", -- set to `false` to disable one of the mappings
+      node_incremental = "<C-space>",
+      scope_incremental = false,
+      node_decremental = "<bs>",
+    },
+  },
+})
+
+---@diagnostic disable-next-line: missing-fields
+require("nvim-treesitter.configs").setup({
+  textobjects = {
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
+        ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
+        ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+        ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+
+        ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
+        ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
+
+        ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+        ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
+
+        ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
+        ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+
+        ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
+        ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+
+        ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
+        ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
+
+        ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+      },
+    },
+
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]f"] = { query = "@call.outer", desc = "Next function call start" },
+        ["]m"] = { query = "@function.outer", desc = "Next method/function def start" },
+        ["]c"] = { query = "@class.outer", desc = "Next class start" },
+        ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
+        ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+
+        -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+        -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+        ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+        ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+      },
+      goto_next_end = {
+        ["]F"] = { query = "@call.outer", desc = "Next function call end" },
+        ["]M"] = { query = "@function.outer", desc = "Next method/function def end" },
+        ["]C"] = { query = "@class.outer", desc = "Next class end" },
+        ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
+        ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+      },
+      goto_previous_start = {
+        ["[f"] = { query = "@call.outer", desc = "Prev function call start" },
+        ["[m"] = { query = "@function.outer", desc = "Prev method/function def start" },
+        ["[c"] = { query = "@class.outer", desc = "Prev class start" },
+        ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
+        ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+      },
+      goto_previous_end = {
+        ["[F"] = { query = "@call.outer", desc = "Prev function call end" },
+        ["[M"] = { query = "@function.outer", desc = "Prev method/function def end" },
+        ["[C"] = { query = "@class.outer", desc = "Prev class end" },
+        ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
+        ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+      },
+    },
+  },
 })

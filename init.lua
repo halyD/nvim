@@ -1,3 +1,3 @@
-print('passing through :', vim.fn.expand('%:p'))
+require("fmst")
 
-require('fmst')
+vim.notify("passing through : " .. vim.fn.expand("%:p"))

@@ -2,10 +2,10 @@
 ### stay healthy
 `:checkhealth`
 ### prerequisites
-- **ripgrep** / fd
-- clipboard : **xclip**
-- LSP : **pyright**, **clangd**, **bashls**, and such
-- linter : ruff-lsp
+- **ripgrep** / fd, 
+- clipboard : **xclip**, tmux native
+- LSP : **pyright**, **clangd**, **bashls**, **zls** 
+- luarocks
 
 ### changes
 ##### browse.nvim
@@ -17,4 +17,3 @@
 
 ##### ShaDa error
 - rm ~/.local/state/nvim/shada/*
-
